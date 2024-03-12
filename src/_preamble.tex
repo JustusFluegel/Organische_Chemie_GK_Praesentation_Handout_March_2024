@@ -1,5 +1,7 @@
-\documentclass[aspectratio=169]{beamer}
-\usetheme{Boadilla}
+\documentclass[10pt,twoside]{report}
+\usepackage{beamerarticle}
+\usepackage{geometry}
+\geometry{a4paper,rmargin=2cm, lmargin=1cm, tmargin=2.5cm, bmargin=2cm,, headheight=30pt}
 % \usepackage[a4paper, margin=1.5cm]{geometry}
 \usepackage{tikz}
 \usetikzlibrary{automata, positioning, arrows, chains, fit, shapes, calc}
@@ -8,12 +10,67 @@
 \usepackage{chemmacros}
 \usepackage{commath}
 \usepackage{dirtytalk}
+\usepackage{layouts}
 \tikzset{
 -, % makes the edges directed
 %>=stealth, % makes the arrow heads bold
 node distance=3cm, % specifies the minimum distance between two nodes. Change if necessary.
 initial text=start, % sets the text that appears on the start arrow
 }
+
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{fancyhdr}
+\RequirePackage{emptypage}
+% \RequirePackage{extsizes}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LO]{\leftmark}
+\fancyhead[RE]{\leftmark}
+\fancyhead[RO]{\fontsize{9}{10} \thepage}
+\fancyhead[LE]{\fontsize{9}{10} \thepage}
+\makeatletter
+\fancyfoot[L]{
+      \begin{tabular}[t]{c}
+        \@author
+      \end{tabular}
+}
+\fancyfoot[R]{
+  \@title
+}
+\makeatother
+
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+
+\fancypagestyle{plain}{}
+\RequirePackage{titlesec}
+\titleformat{\chapter}[hang]{\fontsize{16}{10}\bfseries}{\thechapter}{12pt}{}{}
+\titleformat{\section}[hang]{\fontsize{14}{10}\bfseries}{\thesection}{12pt}{}{}
+\titleformat{\subsection}[hang]{\fontsize{12}{10}\bfseries}{\thesubsection}{12pt}{}{}
+\titlespacing*{\chapter}{0pt}{18pt}{12pt}
+\titlespacing*{\section}{0pt}{4pt}{6pt}
+\titlespacing*{\subsection}{0pt}{4pt}{6pt}
+\makeatletter
+\RequirePackage{caption}
+
+\setlength\parindent{0pt}
+\setlength\itemsep{0.5em}
+\captionsetup[figure]{font={bf,small}}
+
+\makeatletter
+\newcommand*{\cleartoleftpage}{%
+  \clearpage
+  \if@twoside
+    \ifodd\c@page
+      \hbox{}\thispagestyle{empty}\newpage
+      \if@twocolumn
+        \hbox{}\newpage
+      \fi
+    \fi
+  \fi
+}
+\makeatother
+
 
 \edef\sizetape{0.7cm} 
 \tikzset{
@@ -106,6 +163,7 @@ initial text=start, % sets the text that appears on the start arrow
 \newtheorem{prop}[thm]{Proposition}
 \newtheorem*{cor}{Corollary}
 \newtheorem*{KL}{Klein’s Lemma}
+\newtheorem{task}{Aufgabe}[section]
 \theoremstyle{definition}
 \newtheorem{defn}{Definition}[section]
 \newtheorem{conj}{Conjecture}[section]
@@ -136,4 +194,3 @@ initial text=start, % sets the text that appears on the start arrow
 }
 
 \begin{document}
-\maketitle
